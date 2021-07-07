@@ -1,0 +1,75 @@
+323CB Cazan Bogdan-Marian
+
+                            TEMA 3
+                    Protocoale de Comunicatii
+
+        In cadrul acestei teme, am folosit un API de tip REST pus la dispozitie
+de catre serverul cu hostul 34.118.48.238. Implementarea este integral in C++,
+insa sunt folosite pe alocuri si chestii care tin mai mult de C, din simplul
+fapt ca ofera o plaja mai larga de actiune asupra operatiilor cu stringuri si 
+siruri de caractere (char*). Ca si biblioteca externa am folosit pentru json
+nlohmann, dupa ce initial am incercat in C cu parson, fiind insa capabil de a
+avea rabdarea necesara pentru intelegerea functionalitatii unei biblioteci fara
+comentarii (comentarii MULT prea rare).
+        
+        Tema este destul de clar structurata, creand toate comenzile care sunt
+cerute in tema, comenzi care, ca si structura, se aseamana extrem de mult (dupa
+ce am realizat o functie, celelalte functii au devenit doar niste variatii ale 
+primei functii, unele cu modificari minimale, altele cu destul de multe chestii
+schimbate, dar nucleul si structura unei comenzi a fost aceeasi).
+        
+        Pasii urmariti pentru realizarea oricarei comenzi:
+    -- citirea comenzii de la tastatura
+    -- in cazul in care comanda mai ofera si niste prompturi suplimentare
+    clientului, atunci se vor citi si acestea de la tastatura
+    -- se incepe lucrul pentru prelucrarea requestului ce trebuie trimis catre
+    server
+    -- exista 3 tipuri de request: GET, POST si DELETE; primele doua sunt luate
+    din laborator, nefiind modificari majore asupra lor (spre deloc); cea de-a
+    treia comanda este 99% comanda post, avand in mare acelasi principiu de
+    functionare, cu mici diferente
+    -- se genereaza ruta de acces pentru o anumita comanda (este luata din
+    enuntul temei)
+    -- in cazul in care este nevoie, se va da si un tip de aplicatie (in cadrul
+    temei, acesta va fi doar de tipul /application/json); acesta va fi adaugat
+    la campul content type.
+    -- pentru comenzi precum enter_library si logout va fi nevoie de un cookie
+    de logare, care sa ne confirme accesul respectivului utilizator la server
+    -- pentru comenzi care actioneaza asupra bibliotecilor (listarea cartilor,
+    listarea unei carti dupa un id, adaugaraea unei noi carti si eliminarea
+    alteia deja existente) va fi nevoie de un token de tip JWT, pe care il
+    primim in momentul intrarii cu succes in biblioteca.
+    -- dupa preprocesarea datelor, se va computa mesajul de request
+    -- se tine cont de tipul mesajului (din cele 3 enumerate mai sus putin)
+    -- se va trimite mesajul astfel format catre server
+    -- se va receptiona din partea serverului un raspuns
+    -- pasul final este cel de a  "interpreta" mesajul, si anume: daca mesajul
+    intoarce ceea ce ar trebui sa faca comanda in sine, atunci se va afisa un
+    mesaj corespunzator; daca insa mesajul are in cadrul acestuia o eroare,
+    atunci se va afisa un mesaj de eroare corespunzator. In unele cazuri mai
+    apar si erori de la server (de tipul bad request). Se trateaza si aceste
+    cazuri mai "speciale", zic speciale pentru ca nu erau de facto de tratat in
+    cadrul enuntului temei.
+
+        Desi este destul de evident din cod si din comentariile din cod, voi
+enumera si aici pe scurt comenzile:
+    -? register > inregistreaza un client in server;
+    -? login > logeaza un client deja inregistrat;
+    -? enter_library > se intra in biblioteca
+    ?- get_books > afiseaza toate cartile din cadrul librariei; daca libraria nu
+    contine carti in acel moment, se va spune acest lucru
+    ?- get_book > afiseaza toate datele despre o carte cautata dupa ID
+    ?- add_book > adauga o carte in biblioteca
+    ?- delete_book > sterge o carte din biblioteca, dupa un ID dat
+    ?- logout > face posibila delogarea clientului din server
+    ?- exit > inchiderea aplicatiei
+
+    Obs: pentru comenzi neexistente, se afiseaza mesaje corespunzatoare.
+
+        Overall tema a fost ok, cu mici exceptii legate de enuntul acesteia
+gresit pe alocuri (cum ar fi spre exemplu la get_book, unde se spune ca se 
+intoarce un obiect de tip json, dar de fapt se intoarce o lista de obiecte) si
+alte mici parti nespecificate. Pentru asta, a fost nevoie de citirea suplimentara
+a forumului. Cu toate acestea, tema se face lejer intr-o zi (de facultate chiar,
+cu laburi si cursuri).
+
